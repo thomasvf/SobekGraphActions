@@ -12,11 +12,22 @@ public class EditNodeNameAction extends UserAction {
         this.newName = newName;
     }
 
+    public EditNodeNameAction() {
+    }
+
     public String getOldName() {
         return oldName;
     }
 
     public String getNewName() {
         return newName;
+    }
+
+    public void setOldName(String oldName) {
+        this.oldName = oldName;
+    }
+
+    public void setNewName(String newName) {
+        this.newName = newName;
     }
 }

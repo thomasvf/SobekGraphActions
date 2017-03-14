@@ -1,6 +1,9 @@
 import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 /**
@@ -97,14 +100,48 @@ public class UserActionsSingleton {
         fileInputStream.close();
     }
 
+    public void loadFromJson(String filepath) throws IOException{
+        ObjectMapper mapper = new ObjectMapper();
+        graphUserActions = mapper.readValue(new File(filepath), GraphUserActions.class);
+    }
+
     public String getUserActionsAsJson()  throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(graphUserActions);
     }
 
     public void saveToJson(String filepath) throws IOException {
-        PrintWriter printWriter = new PrintWriter(filepath.concat(".json"));
+        PrintWriter printWriter = new PrintWriter(filepath);
         printWriter.println(getUserActionsAsJson());
         printWriter.close();
+    }
+
+    public ArrayList<String> sendPostWithJson(String address, String postKey) throws IOException {
+        URL url = new URL(address);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setDoInput(true);
+        connection.setDoOutput(true);
+        connection.setRequestMethod("POST");
+
+        String query = postKey + "=" + URLEncoder.encode(this.getUserActionsAsJson(), "UTF-8");
+        OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+        writer.write(query);
+        writer.close();
+
+        int status = connection.getResponseCode();
+        if(status != HttpURLConnection.HTTP_OK){
+            throw new IOException("Error connecting to server: " + status);
+        }
+
+        ArrayList<String> response = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            response.add(line);
+        }
+        reader.close();
+        connection.disconnect();
+
+        return response;
     }
 }

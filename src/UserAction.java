@@ -11,7 +11,13 @@ public class UserAction implements Serializable{
         this.order = order;
     }
 
+    public UserAction(){}
+
     public int getOrder(){
         return this.order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
     }
 }

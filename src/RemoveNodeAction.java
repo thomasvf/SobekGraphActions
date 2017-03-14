@@ -11,7 +11,14 @@ public class RemoveNodeAction extends UserAction {
         nodeName = name;
     }
 
+    public RemoveNodeAction() {
+    }
+
     public String getNodeName() {
         return nodeName;
+    }
+
+    public void setNodeName(String nodeName) {
+        this.nodeName = nodeName;
     }
 }

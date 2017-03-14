@@ -12,11 +12,22 @@ public class RemoveEdgeAction extends UserAction {
         this.destinyNodeName = destinyNodeName;
     }
 
+    public RemoveEdgeAction() {
+    }
+
     public String getOriginNodeName() {
         return originNodeName;
     }
 
     public String getDestinyNodeName() {
         return destinyNodeName;
+    }
+
+    public void setOriginNodeName(String originNodeName) {
+        this.originNodeName = originNodeName;
+    }
+
+    public void setDestinyNodeName(String destinyNodeName) {
+        this.destinyNodeName = destinyNodeName;
     }
 }

@@ -10,7 +10,14 @@ public class NodeClickAction extends UserAction{
         nodeName = name;
     }
 
+    public NodeClickAction() {
+    }
+
     public String getNodeName() {
         return nodeName;
+    }
+
+    public void setNodeName(String nodeName) {
+        this.nodeName = nodeName;
     }
 }

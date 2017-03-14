@@ -11,7 +11,13 @@ public class AddNodeAction extends UserAction{
         nodeName = name;
     }
 
+    public AddNodeAction(){}
+
     public String getNodeName() {
         return nodeName;
+    }
+
+    public void setNodeName(String nodeName) {
+        this.nodeName = nodeName;
     }
 }

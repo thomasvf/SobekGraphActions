@@ -11,8 +11,10 @@ import java.util.ArrayList;
  *
  */
 public class UserActionsSingleton {
-    private GraphUserActions graphUserActions;
+    private final static String SERVER_ADDRESS = "http://192.168.1.105/SobekGraphActionsService/index.php";
+    private final static String JSON_POST_KEY = "USER_ACTIONS";
 
+    private GraphUserActions graphUserActions;
     private UserActionsSingleton(){
         graphUserActions = new GraphUserActions();
     }
@@ -177,7 +179,7 @@ public class UserActionsSingleton {
     }
 
     public ArrayList<String> saveJsonToServer() throws IOException{
-        return this.sendPostWithJson("http://192.168.1.105/SobekGraphActionsService/index.php",
-                "USER_ACTIONS");
+        return this.sendPostWithJson(SERVER_ADDRESS,
+                JSON_POST_KEY);
     }
 }

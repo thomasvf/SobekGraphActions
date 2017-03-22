@@ -85,7 +85,8 @@ public class UserActionsSingletonTest {
                     " Order: " + userAction.getOrder());
         }
 
-        ArrayList<String> serverResponse = userActionsSingleton.sendPostWithJson("http://192.168.13.106/AppSobek/UserActionsReceiver.php",
+        ArrayList<String> serverResponse = userActionsSingleton.
+                sendPostWithJson("http://192.168.13.106/UserActionsSingleton/UserActionsReceiver.php",
                 "USER_ACTIONS");
         System.out.println("Server response: ");
         for(String response : serverResponse){
@@ -113,8 +114,7 @@ public class UserActionsSingletonTest {
         userActionsSingleton.nodeClick("node1");
         userActionsSingleton.removeEdge("node3", "node2");
 
-        ArrayList<String> serverResponse = userActionsSingleton.sendPostWithJson("http://192.168.13.106/AppSobek/UserActionsReceiver.php",
-                "USER_ACTIONS");
+        ArrayList<String> serverResponse = userActionsSingleton.saveJsonToServer();
         System.out.println("Server response: ");
         for(String response : serverResponse){
             System.out.println(response);

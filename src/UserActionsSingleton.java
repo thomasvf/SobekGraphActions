@@ -100,6 +100,33 @@ public class UserActionsSingleton {
         fileInputStream.close();
     }
 
+    public ArrayList<String> sendSerializable(String address) throws IOException{
+        URL url = new URL(address);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setDoInput(true);
+        connection.setDoOutput(true);
+
+        ObjectOutputStream outputStream = new ObjectOutputStream(connection.getOutputStream());
+        outputStream.writeObject(this.graphUserActions);
+        outputStream.close();
+
+        int status = connection.getResponseCode();
+        if(status != HttpURLConnection.HTTP_OK){
+            throw new IOException("Error connecting to server: " + status);
+        }
+
+        ArrayList<String> response = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            response.add(line);
+        }
+        reader.close();
+        connection.disconnect();
+
+        return response;
+    }
+
     public void loadFromJson(String filepath) throws IOException{
         ObjectMapper mapper = new ObjectMapper();
         graphUserActions = mapper.readValue(new File(filepath), GraphUserActions.class);
@@ -117,17 +144,21 @@ public class UserActionsSingleton {
     }
 
     public ArrayList<String> sendPostWithJson(String address, String postKey) throws IOException {
+        //Create connection
         URL url = new URL(address);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setDoInput(true);
         connection.setDoOutput(true);
         connection.setRequestMethod("POST");
 
+        //Build query
         String query = postKey + "=" + URLEncoder.encode(this.getUserActionsAsJson(), "UTF-8");
+        //Starts connection with query
         OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
         writer.write(query);
         writer.close();
 
+        //Get response from server
         int status = connection.getResponseCode();
         if(status != HttpURLConnection.HTTP_OK){
             throw new IOException("Error connecting to server: " + status);
@@ -143,5 +174,10 @@ public class UserActionsSingleton {
         connection.disconnect();
 
         return response;
+    }
+
+    public ArrayList<String> saveJsonToServer() throws IOException{
+        return this.sendPostWithJson("http://192.168.1.105/SobekGraphActionsService/index.php",
+                "USER_ACTIONS");
     }
 }

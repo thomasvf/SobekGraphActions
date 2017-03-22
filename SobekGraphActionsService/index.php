@@ -20,7 +20,7 @@ function jsonFromPost(){
     }
 }
 
-function makeJsonFileName(){
+function makeJsonFilename(){
     $currentDate = date("d").date("m").date("y")."_".date("H").date("i");
     $uniqueId = substr(uniqid(rand(), true), 20);
 
@@ -28,8 +28,8 @@ function makeJsonFileName(){
 }
 
 function saveJson($jsonString){
-    $fileName = makeJsonFileName();
-    $jsonFileHandler = fopen(GRAPH_ACTIONS_DIRECTORY.$fileName.".json", "w");
+    $filename = makeJsonFilename();
+    $jsonFileHandler = fopen(GRAPH_ACTIONS_DIRECTORY.$filename.".json", "w");
     fwrite($jsonFileHandler, $jsonString);
     fclose($jsonFileHandler);
 }

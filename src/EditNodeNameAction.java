@@ -30,4 +30,12 @@ public class EditNodeNameAction extends UserAction {
     public void setNewName(String newName) {
         this.newName = newName;
     }
+
+    @Override
+    public String toString() {
+        return "EditNodeNameAction{" +
+                "oldName='" + oldName + '\'' +
+                ", newName='" + newName + '\'' +
+                '}';
+    }
 }

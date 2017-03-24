@@ -30,4 +30,12 @@ public class AddEdgeAction extends UserAction{
     public void setDestinyNodeName(String destinyNodeName) {
         this.destinyNodeName = destinyNodeName;
     }
+
+    @Override
+    public String toString() {
+        return "AddEdgeAction{" +
+                "originNodeName='" + originNodeName + '\'' +
+                ", destinyNodeName='" + destinyNodeName + '\'' +
+                '}';
+    }
 }

@@ -30,4 +30,12 @@ public class RemoveEdgeAction extends UserAction {
     public void setDestinyNodeName(String destinyNodeName) {
         this.destinyNodeName = destinyNodeName;
     }
+
+    @Override
+    public String toString() {
+        return "RemoveEdgeAction{" +
+                "originNodeName='" + originNodeName + '\'' +
+                ", destinyNodeName='" + destinyNodeName + '\'' +
+                '}';
+    }
 }

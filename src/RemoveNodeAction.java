@@ -21,4 +21,11 @@ public class RemoveNodeAction extends UserAction {
     public void setNodeName(String nodeName) {
         this.nodeName = nodeName;
     }
+
+    @Override
+    public String toString() {
+        return "RemoveNodeAction{" +
+                "nodeName='" + nodeName + '\'' +
+                '}';
+    }
 }

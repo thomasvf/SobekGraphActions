@@ -120,4 +120,29 @@ public class UserActionsSingletonTest {
             System.out.println(response);
         }
     }
+
+    @Test
+    public void testToString(){
+        UserActionsSingleton userActionsSingleton = UserActionsSingleton.getInstance();
+        userActionsSingleton.addEdge("node1", "node2");
+        userActionsSingleton.addNode("node3");
+        userActionsSingleton.addNode("node4");
+        userActionsSingleton.removeNode("node2");
+        userActionsSingleton.editNodeName("node3", "node3newname");
+        userActionsSingleton.nodeClick("node1");
+        userActionsSingleton.removeEdge("node3", "node2");
+        userActionsSingleton.removeNode("node2");
+        userActionsSingleton.editNodeName("node3", "node3newname");
+        userActionsSingleton.nodeClick("node1");
+        userActionsSingleton.removeEdge("node3", "node2");
+        userActionsSingleton.removeNode("node2");
+        userActionsSingleton.editNodeName("node3", "node3newname");
+        userActionsSingleton.nodeClick("node1");
+        userActionsSingleton.removeEdge("node3", "node2");
+
+        ArrayList<UserAction> userActions = userActionsSingleton.getAllActions();
+        for(UserAction userAction : userActions){
+            System.out.println(userAction);
+        }
+    }
 }

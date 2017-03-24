@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  */
 public class UserActionsSingleton {
-    private final static String SERVER_ADDRESS = "http://192.168.1.105/SobekGraphActionsService/index.php";
+    private final static String SERVER_ADDRESS = "http://192.168.1.102/SobekGraphActionsService/index.php";
     private final static String JSON_POST_KEY = "USER_ACTIONS";
 
     private GraphUserActions graphUserActions;

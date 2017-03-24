@@ -20,4 +20,11 @@ public class NodeClickAction extends UserAction{
     public void setNodeName(String nodeName) {
         this.nodeName = nodeName;
     }
+
+    @Override
+    public String toString() {
+        return "NodeClickAction{" +
+                "nodeName='" + nodeName + '\'' +
+                '}';
+    }
 }
